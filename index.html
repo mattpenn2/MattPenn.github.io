@@ -1065,10 +1065,57 @@
         <div class="social-links">
             <a href="https://www.linkedin.com/in/cmpenn" title="LinkedIn">💼</a>
             <a href="https://github.com/mattpenn2" title="GitHub">🔗</a>
-            <a href="mattpenn7@gmail.com" title="Email">📧</a>
+            <a href="mailto:mattpenn7@gmail.com" title="Email">📧</a>
         </div>
-        <p style="color: var(--text-muted);">© 2025 Your Name. All rights reserved.</p>
+        <p style="color: var(--text-muted);">© 2025 Matt Penn.</p>
     </footer>
-</body>
 
+    <!-- JavaScript for Interactive Features -->
+    <script>
+        // Toggle expandable content
+        function toggleContent(id) {
+            const content = document.getElementById(id);
+            const button = event.target;
+            
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                button.classList.remove('active');
+            } else {
+                content.classList.add('active');
+                button.classList.add('active');
+            }
+        }
+
+        // Lightbox functionality
+        function openLightbox(imgSrc) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = imgSrc;
+            lightbox.classList.add('active');
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+        }
+
+        // Close lightbox on background click
+        document.addEventListener('DOMContentLoaded', function() {
+            const lightbox = document.getElementById('lightbox');
+            if (lightbox) {
+                lightbox.addEventListener('click', function(e) {
+                    if (e.target === lightbox) {
+                        closeLightbox();
+                    }
+                });
+            }
+        });
+    </script>
+
+    <!-- Lightbox for images -->
+    <div id="lightbox" class="lightbox">
+        <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+        <img id="lightbox-img" src="" alt="Lightbox image">
+    </div>
+</body>
 </html>
