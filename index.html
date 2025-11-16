@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #64748b;
+            --bg: #0f172a;
+            --bg-light: #1e293b;
+            --text: #f8fafc;
+            --text-muted: #cbd5e1;
+            --accent: #3b82f6;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            list-style: none;
+            gap: 2rem;
+            padding: 0 2rem;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--bg) 0%, var(--bg-light) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+            top: -250px;
+            right: -250px;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(50px, 50px) rotate(180deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent) 0%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .cta-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section:nth-child(even) {
+            background: var(--bg-light);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .card {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 12px;
+            transition: all 0.3s;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        section:nth-child(even) .card {
+            background: var(--bg);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
+            border-color: var(--accent);
+        }
+
+        .card h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+
+        /* Project Media */
+        .project-media {
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .project-media img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+
+        .project-media img:hover {
+            transform: scale(1.02);
+        }
+
+        .project-media video {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+        }
+
+        .media-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .media-gallery img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .media-gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+        }
+
+        /* Lightbox for images */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 3000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90vh;
+            border-radius: 8px;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            font-size: 3rem;
+            color: white;
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: transform 0.3s;
+        }
+
+        .lightbox-close:hover {
+            transform: scale(1.2);
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .skill-category h3 {
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .skill-item {
+            background: var(--bg);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 3px solid var(--primary);
+            transition: all 0.3s;
+        }
+
+        .skill-item:hover {
+            border-left-width: 6px;
+            padding-left: 1.5rem;
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: var(--primary);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            width: calc(50% - 2rem);
+        }
+
+        .timeline-item:nth-child(odd) {
+            margin-left: auto;
+            padding-left: 2rem;
+        }
+
+        .timeline-item:nth-child(even) {
+            padding-right: 2rem;
+            text-align: right;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: var(--primary);
+            border-radius: 50%;
+            top: 0;
+        }
+
+        .timeline-item:nth-child(odd)::before {
+            left: -8px;
+        }
+
+        .timeline-item:nth-child(even)::before {
+            right: -8px;
+        }
+
+        .timeline-content {
+            background: var(--bg-light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .timeline-content:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
+        }
+
+        .timeline-content h3 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content .date {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Content Sections */
+        .content-block {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-top: 2rem;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        section:nth-child(even) .content-block {
+            background: var(--bg);
+        }
+
+        .content-block h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .content-block ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .content-block li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text-muted);
+        }
+
+        .content-block li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        /* Resume Section */
+        .resume-container {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .resume-link {
+            display: inline-block;
+            padding: 1.5rem 3rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .resume-link:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-light);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .timeline::before {
+                left: 0;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 2rem !important;
+                padding-right: 0 !important;
+                text-align: left !important;
+            }
+
+            .timeline-item::before {
+                left: -8px !important;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Expandable Content */
+        .expandable-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, opacity 0.5s ease-out;
+            opacity: 0;
+        }
+
+        .expandable-content.active {
+            max-height: 5000px;
+            opacity: 1;
+            transition: max-height 0.7s ease-in, opacity 0.7s ease-in;
+        }
+
+        .expand-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+
+        .expand-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        .expand-btn.active::after {
+            content: ' ▲';
+        }
+
+        .expand-btn::after {
+            content: ' ▼';
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--bg-light);
+            padding: 3rem;
+            border-radius: 12px;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            margin: 2rem;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            animation: slideUp 0.3s;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-content h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .modal-content p {
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: color 0.3s;
+        }
+
+        .close-btn:hover {
+            color: var(--accent);
+        }
+
+        /* Custom Scrollbar for Modal */
+        .modal-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .modal-content::-webkit-scrollbar-track {
+            background: var(--bg);
+            border-radius: 4px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#professionalism">Professionalism</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#extras">Extras</a></li>
+            <li><a href="#career">Career Plan</a></li>
+            <li><a href="#resume">Resume</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Matt Penn</h1>
+            <p>Cybersecurity Student/Professional</p>
+            <a href="#about" class="cta-button">Explore My Work</a>
+        </div>
+    </section>
+
+    <!-- Executive Summary -->
+    <section id="executive-summary">
+        <h2>Executive Summary</h2>
+        <div class="content-block">
+            <p style="color: var(--text-muted); line-height: 1.8;">
+              <p>This portfolio documents acts as a comprehensive review of Matt Penn’s academic and professional journey. He is a senior at Marymount University graduating December 2025 with a Bachelor of Science in Cybersecurity with a minor in Network Security.</p>
+<br>
+
+<p>Beginning with an about me, Matt explains his desire to help others through cybersecurity and concludes that working in the government or government contractor is where he thinks he would be able to make the largest impact.</p>
+<br>
+
+<p>Following that, he dives into how he gained the current knowledge he has gained from classes, internships, and work. This segues into his technical skills gained from his experiences. The most relevant skills are his numerous cybersecurity tools, AI/ML tools and knowledge, and Cloud computing tools.</p>
+<br>
+
+<p>After he outlined his skills and where he acquired them, he demonstrates some of these skills in relevant projects like his capstone AI Assisted Offline Reconnaissance and Hacking tool.</p>
+<br>
+
+<p>He then states how important professionalism is to him and demonstrates scenarios to provide evidence of this statement. After this, he describes his work experience, involvement with school and CTF competitions, and goes through his awards and honors. Most importantly noting his success within the National Cyber League competitions (top 1%) and his Dean’s List invitations each semester.</p>
+
+            </p>
+        </div>
+    </section>
+
+    <!-- About Me -->
+    <section id="about">
+        <h2>About Me</h2>
+        <div class="content-block">
+            <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 1.5rem;">
+                <p>My name is Matt Penn and I grew up as the son of a police officer and a public-school teacher, there is nothing more admirable and important to me than helping others and securing our future. As society continues to transition into a technology forward age, cyber threats are at an all-time high. This is why I went into a cybersecurity major with a minor in network security at Marymount University, I want to do my part and help where I can.&#13;&#10;</p>
+                <br>
+                <p>I started at Marymount in Fall of 2023 and am expected to graduate in December 2025. During my time as a cybersecurity major, I have been fortunate enough to be awarded the Dean’s List honor each semester. This directly reflects my dedication and drive to pursue my dream of helping others through cybersecurity. Through my coursework I have gained extensive knowledge and technical expertise in cybersecurity. Some of my favorite and most relevant courses include Cybersecurity Attack and Defend, Network Administration, Advanced Python Applications, Malware Analysis, and Digital Forensics. To apply the skills and knowledge I have acquired, I compete in cyber events like capture the flags (CTFs). In the spring 2024 National Cyber League CTF, the team I was part of was ranked in the 99th percentile out of over 7,000 teams!<br></p>
+                <br>
+                <p>During my time working with Millennium Corporation, funded by the Department of Defense, as a cyber intern I gained hands-on practical experience where I gained skills in red teaming, offensive methodologies, network analysis, and vulnerability exploitation. As a cyber research lead working in the Marymount Cyber Clinic to assist local businesses with their cybersecurity needs, I have gained experience with network engineering/security, risk assessment, as well as extensive problem solving. Furthermore, in December 2024 I acquired my Network+ in March 2025, my Security+, and in September 2025 I obtained my PenTest+ from CompTIA, signifying my knowledge with networking, cybersecurity fundamentals and penetration testing.<br></p>
+                <br>
+                <p>To work towards my goal of helping others, I have to start somewhere in the ever-growing field of cyber and the roles I am seeking are Junior Penetration Tester, Cybersecurity Analyst, and entry level Cybersecurity Engineer. These roles will allow me to apply my technical knowledge and skills while also being able to continue to grow as a person and professional. I thrive in a collaborative, supportive environment where I can learn from my peers and supervisors. I am incredibly eager to continue my cybersecurity journey and help wherever I can!</p>
+
+
+            </p>
+        </div>
+    </section>
+
+    <!-- Education & Training -->
+    <section id="education">
+        <h2>Knowledge Acquisition</h2>
+        <div class="card-grid">
+            <div class="card">
+                <h3>Education</h3>
+                <p><strong>Cybersecurity Major</strong></p>
+                <p><strong>Network Security Minor</strong></p>
+                <p>Marymount University</p>
+                <p>Graduating December 2025</p>
+                <p style="margin-top: 1rem;">GPA: 3.9</p>
+            </div>
+            <div class="card">
+                <h3>Certifications</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.5rem;">• Network + - Dec 2024</li>
+                    <li style="margin-bottom: 0.5rem;">• Security + - Mar 2025</li>
+                    <li style="margin-bottom: 0.5rem;">• Pentest + - Sep 2025</li>
+                    <li style="margin-bottom: 0.5rem;">• Google Project Management - Aug 2025</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Training</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.5rem;">• Git/Github Bootcamp - 2024</li>
+                    <li style="margin-bottom: 0.5rem;">• C Programming Bootcamp - 2025</li>
+                    <li style="margin-bottom: 0.5rem;">• Linux Bootcamp - 2025</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Technical Skills -->
+    <section id="skills">
+        <h2>Technical Skills</h2>
+        <div class="skills-container">
+            <div class="skill-category">
+                <h3>Programming Languages</h3>
+                <div class="skill-item">Python</div>
+                <div class="skill-item">SQL</div>
+                <div class="skill-item">Java</div>
+            </div>
+            <div class="skill-category">
+                <h3>Cybersecurity Tools</h3>
+                <div class="skill-item">Nmap</div>
+                <div class="skill-item">Metasploit</div>
+                <div class="skill-item">Wireshark</div>
+                <div class="skill-item">Git</div>
+                <div class="skill-item">Kismet</div>
+                <div class="skill-item">Impacket</div>
+                <div class="skill-item">Hashcat</div>
+                <div class="skill-item">John The Ripper</div>
+                <div class="skill-item">Hping3</div>
+                <div class="skill-item">Bloodhound</div>
+
+                
+            </div>
+            <div class="skill-category">
+                <h3>Frameworks & Standards</h3>
+                <div class="skill-item">NIST 800-53</div>
+                <div class="skill-item">Risk Management Framework (RMF)</div>
+            </div>
+            <div class="skill-category">
+                <h3>Cloud & Infrastructure</h3>
+                <div class="skill-item">AWS</div>
+                <div class="skill-item">Linux</div>
+                <div class="skill-item">Docker</div>
+            </div>
+            <div class="skill-category">
+                <h3>AI & Machine Learning</h3>
+                <div class="skill-item">AI/ML Development</div>
+                <div class="skill-item">Large Language Models (LLMs)</div>
+                <div class="skill-item">Retrieval-Augmented Generation (RAG)</div>
+            </div>
+            <div class="skill-category">
+                <h3>Professional Skills</h3>
+                <div class="skill-item">Leadership</div>
+                <div class="skill-item">Teamwork</div>
+                <div class="skill-item">Problem Solving</div>
+                <div class="skill-item">Adaptability</div>
+                <div class="skill-item">Attention to Detail</div>
+            </div>
+        </div>
+    </section>
+
+   <!-- Professionalism -->
+    <section id="professionalism">
+        <h2>Professionalism</h2>
+        <div class="content-block">
+            <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 1.5rem;">
+                Through my experiences at Marymount and work internships, professionalism has become central to my approach. To me, professionalism means taking responsibility and doing the absolute best I can in every possible situation.
+            </p>
+            <button class="expand-btn" onclick="toggleContent('professionalism-full')">View Full Professionalism Statement</button>
+            <div id="professionalism-full" class="expandable-content">
+                <h3 style="margin-top: 1.5rem;">Communication & Teamwork</h3>
+                <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 1.5rem;">
+                    One of the most notable ways I demonstrate professionalism is through my participation and performance in group activities. The most vital component when working in group environments is communication. During my capstone project, I worked with two classmates where I was responsible for managing and creating the AI portion of the project. When I encountered a bug that was unfamiliar to me, I immediately relayed this to my team, and with their assistance, the bug was fixed within a day. Communication is absolutely key in a group environment, and I believe that my group's communication skills were what allowed us to succeed with our capstone project as we took on an ambitious challenge.
+                </p>
+                
+                <h3>Problem-Solving Excellence</h3>
+                <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 1.5rem;">
+                    Problem-solving is another aspect of professionalism that I have learned through trial and error. In the field of cybersecurity and AI, being able to effectively troubleshoot and take the necessary steps to solve problems is a necessity. Nothing exemplifies this more than the CTF competitions that I have participated in. The challenges in these competitions are sometimes incredibly difficult and often outside of my area of expertise. However, this does not deter me—I welcome the challenge and work through problems methodically, learning what I can and solving what I can. I have been successful in these competitions not only due to my skills and knowledge, but more importantly due to my problem-solving abilities.
+                </p>
+
+                <h3>Professional Research & Collaboration</h3>
+                <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 1.5rem;">
+                    A key moment that highlights and contributed to my professionalism greatly has been my research and development project for Marymount and Millennium Corporation. This was an 8-month long project where I worked and collaborated closely with Millennium personnel and Army personnel as well as my team at Marymount. We held weekly meetings to give updates, ask questions, confirm objectives, and stay on track. This project culminated with me and my partner presenting at a symposium to both technical and non-technical audiences including government contractors and government employees.
+                </p>
+
+                <h3>Value of Diversity</h3>
+                <p style="color: var(--text-muted); line-height: 1.8;">
+                    Marymount has taught me the value of diverse teams and groups. The different backgrounds that I have been able to work with have greatly allowed me to understand many different perspectives. This has enhanced my creativity and broadened my problem-solving abilities significantly.
+                </p>
+            </div>
+        </div>
+    </section>
+    <!-- Projects -->
+    <section id="projects">
+        <h2>Projects</h2>
+        <div class="card-grid">
+            <div class="card">
+                <h3>AI Assisted Offline Reconnaissance and Hacking Tool</h3>
+                <p style="margin-bottom: 1rem;"><strong>Type:</strong> Capstone</p>
+                
+                <!-- Add a video -->
+                <div class="project-media">
+                    <video controls poster="path-to-thumbnail.jpg">
+                        <source src="Wyrm Capstone Presentation Final.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                
+                <p>•	Developed prototype cybersecurity tool optimized for offline, penetration testing in air-gapped or highly controlled environments</p>
+
+<p>•	Designed offline AI solution to assist in giving recommendations and analysis</p>
+
+<p>•  	Integrated Linux, automation, single-board computing, and reducing detectable digital footprint for covert red team operations</p>
+<p>
+    •	Engineered a Bluetooth serial communication feature to establish wireless access channels to target devices, enabling remote command execution.
+</p>
+                <p style="margin-top: 1rem;"><strong>Skills:</strong> Linux, AI/ML, Bluetooth</p>
+            </div>
+            
+            <div class="card">
+                <h3>Project Name 2 (with Images)</h3>
+                <p style="margin-bottom: 1rem;"><strong>Type:</strong> Advanced Python Applications Final</p>
+                
+                <!-- Add multiple images in a gallery -->
+                <div class="media-gallery">
+                    <img src="EMN_graphics.png" alt="RPG Game" onclick="openLightbox('EMN_graphics.png')">
+                </div>
+                <div class="project-media">
+                    <video controls poster="path-to-thumbnail.jpg">
+                        <source src="EMN Game Recording.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                
+<ul>
+    <li>Created and developed a story-based RPG that follows a scene from the short story <i>The Evening and the Morning and the Night</i> by Octavia E. Butler</li>
+    <li>Follows a character and has a follower character giving dialogue when certain points of the map are triggered</li>
+    <li>Fully made with python, utilizing the PyGame library</li>
+</ul>
+
+                <p style="margin-top: 1rem;"><strong>Technologies:</strong> Python, PyGame, Tiled</p>
+            </div>
+            
+            <div class="card">
+                <h3>Project Name 3</h3>
+                <p style="margin-bottom: 1rem;"><strong>Type:</strong> Personal</p>
+                
+                <!-- Or add a single featured image -->
+                <div class="project-media">
+                    <img src="Screenshot 2025-11-16 at 4.11.27 AM.png" alt="Project screenshot" onclick="openLightbox('Screenshot 2025-11-16 at 4.11.27 AM.png')">
+                </div>
+                
+                <ul>
+    <li>Builds an offline policy assistant application using PyQt5, which allows users to load company policy documents, embed them into a ChromaDB database, and query them locally.</li>
+    <li>Processes PDF and text files by extracting their contents, chunking the text, generating embeddings with SentenceTransformers, and storing them in a searchable vector database.</li>
+    <li>Retrieves relevant policy information using semantic search and generates answers using locally hosted Ollama LLM models selected by the user.</li>
+</ul>
+
+                <p style="margin-top: 1rem;"><strong>Technologies:</strong> AI/ML, Python, PyQT5</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work Experience -->
+    <section id="experience">
+        <h2>Work Experience</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>Cybersecurity Research Lead, Cyberclinic</h3>
+                    <p class="date">Marymount University, Arlington, VA | Feb 2025 - Sept 2025 | 20 hours/week</p>
+                    <ul style="list-style: none; padding: 0; margin-top: 1rem;">
+                        <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative; color: var(--text-muted);">
+                            <span style="position: absolute; left: 0; color: var(--primary);">•</span>
+                            Conducted research on cybersecurity requirements for small businesses and prepared marketing materials for the clinic.
+                        </li>
+                        <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative; color: var(--text-muted);">
+                            <span style="position: absolute; left: 0; color: var(--primary);">•</span>
+                            Received hands-on training in Splunk for analyzing Security Operations Center (SOC) logs, enhancing knowledge of real-time threat detection and security operations.
+                        </li>
+                        <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative; color: var(--text-muted);">
+                            <span style="position: absolute; left: 0; color: var(--primary);">•</span>
+                            Provided services to local small businesses such as cyber awareness training, cybersecurity audits, and vulnerability assessments under the direction of Marymount technology faculty.
+                        </li>
+                        <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative; color: var(--text-muted);">
+                            <span style="position: absolute; left: 0; color: var(--primary);">•</span>
+                            <strong style="color: var(--accent);">Promoted from Research Assistant to Research Lead after 4 weeks</strong> following successful Security+ certification and demonstrated technical and leadership capabilities.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>Millennium AI Research Assistant</h3>
+                    <p class="date">Marymount University, Arlington, VA | May 2024 - Feb 2025 | 20 hours/week</p>
+                    <ul style="list-style: none; padding: 0; margin-top: 1rem;">
+                        <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative; color: var(--text-muted);">
+                            <span style="position: absolute; left: 0; color: var(--primary);">•</span>
+                            Leveraged advanced AI research and development to create innovative solutions for automated test script generation.
+                        </li>
+                        <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative; color: var(--text-muted);">
+                            <span style="position: absolute; left: 0; color: var(--primary);">•</span>
+                            Implemented retrieval-augmented generation (RAG) by integrating large language models (LLMs) with external knowledge sources to generate automated test scripts based on test cases and input.
+                        </li>
+                        <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative; color: var(--text-muted);">
+                            <span style="position: absolute; left: 0; color: var(--primary);">•</span>
+                            Composed a comprehensive white paper of detailed research findings and technical outcomes; delivered findings to key DoD stakeholders at a research symposium.
+                        </li>
+                        <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative; color: var(--text-muted);">
+                            <span style="position: absolute; left: 0; color: var(--primary);">•</span>
+                            Presented research to a panel at the 2025 Marymount Student Research Conference.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>CY 24 DoD Pathfinder Cyber Intern</h3>
+                    <p class="date">Millennium Corporation (DoD), Orlando, FL | June 2024 - July 2024 | 40 hours/week</p>
+                    <ul style="list-style: none; padding: 0; margin-top: 1rem;">
+                        <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative; color: var(--text-muted);">
+                            <span style="position: absolute; left: 0; color: var(--primary);">•</span>
+                            Selected for a six-week paid cybersecurity and testing internship sponsored by DOT&E and executed by Threat Systems Management Office (TSMO).
+                        </li>
+                        <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative; color: var(--text-muted);">
+                            <span style="position: absolute; left: 0; color: var(--primary);">•</span>
+                            Obtained foundational cybersecurity and software test and evaluation training, which included coursework for Security+ and PenTest+.
+                        </li>
+                        <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative; color: var(--text-muted);">
+                            <span style="position: absolute; left: 0; color: var(--primary);">•</span>
+                            Developed skills in red teaming, offensive methodologies, reconnaissance, and vulnerability exploitation.
+                        </li>
+                        <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative; color: var(--text-muted);">
+                            <span style="position: absolute; left: 0; color: var(--primary);">•</span>
+                            Conducted a gray-box penetration test and presented the findings to both high-level Department of Defense (DoD) DOT&E executives and technical audiences.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>Assistant Coach</h3>
+                    <p class="date">Ashburn Rebels Coach, Ashburn, VA | July 2017 - June 2022 | 20 hours/week</p>
+                    <ul style="list-style: none; padding: 0; margin-top: 1rem;">
+                        <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative; color: var(--text-muted);">
+                            <span style="position: absolute; left: 0; color: var(--primary);">•</span>
+                            Led a competitive travel youth baseball program, responsible for player development, team strategy, game planning, communication and scouting.
+                        </li>
+                        <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative; color: var(--text-muted);">
+                            <span style="position: absolute; left: 0; color: var(--primary);">•</span>
+                            Coached the team to win multiple tournaments, with 3 players progressing to play at the collegiate level.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Extras -->
+    <section id="extras">
+        <h2>Beyond the Resume</h2>
+        <div class="card-grid">
+            <div class="card">
+                <h3>Clubs</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.5rem;">• MU Competitive Cyber Club - Member</li>
+                    <li style="margin-bottom: 0.5rem;">• Marymount Cyber Saints (WICYS) - Member</li>
+
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Volunteer Work</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.5rem;">• Caregivers to Breadwinners - assisted in teaching IT fundamentals to adult caregivers looking to transition into IT</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Awards & Honors</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.5rem;">• Dean's List Every Semester at Marymount</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Career Plan -->
+    <section id="career">
+        <h2>Career Plan</h2>
+        <div class="content-block">
+            <h3>Short-Term Goals (1-2 years)</h3>
+            <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 1.5rem;">
+                At the time of writing this, November 2025, I will be graduating with my B.S. in Cybersecurity in Decmber 2025. My goal is to start working as as Cybersecurity Analyst, Cybersecurity Engineer, or similar role upon graduation. I would ideally like to work within the government or with a contractor since this is where I believe I can largest impact.
+            </p>
+            <h3>Long-Term Vision (3-5 years)</h3>
+            <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 1.5rem;">
+                After I begin my career, I would like to begin working towards my master's degree as well as my doctorate. In my professional career I would like to start working up the chain at my work place. 
+            </p>
+            <h3>Professional Development</h3>
+            <p style="color: var(--text-muted); line-height: 1.8;">
+                In the field of cybersecurity, continuous learning is imperative. This is why I stay up to date on current trends like AI and quantum. Additionally, learning new skills is imperative as well as fun.TryHackMe and Cyebr CTF competitions are how I learn new skills to hone my craft.
+            </p>
+        </div>
+    </section>
+
+    <!-- Resume & Links -->
+    <section id="resume">
+        <h2>Resume & Resources</h2>
+        <div class="resume-container">
+            <a href="Penn_Resume (2).pdf" class="resume-link" download>Download Resume (PDF)</a>
+        </div>
+        <div class="content-block" style="margin-top: 3rem;">
+            <h3>Additional Resources</h3>
+            <ul>
+                <li><a href="https://github.com/mattpenn2" style="color: var(--accent);">GitHub Profile</a></li>
+                <li><a href="www.linkedin.com/in/cmpenn" style="color: var(--accent);">LinkedIn Profile</a></li>
+                <li><a href="#" style="color: var(--accent);">Portfolio Website</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="www.linkedin.com/in/cmpenn" title="LinkedIn">💼</a>
+            <a href="https://github.com/mattpenn2" title="GitHub">🔗</a>
+            <a href="mattpenn7@gmail.com" title="Email">📧</a>
+        </div>
+        <p style="color: var(--text-muted);">© 2025 Your Name. All rights reserved.</p>
+    </footer>
+</body>
+</html>
